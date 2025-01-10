@@ -9,17 +9,17 @@ from yahooquery import search
 
 
 # Twitter API credentials
-consumer_key = 'JTDdjtDO2u5FTFHcJGKx7oTRJ'
-consumer_secret = 'oIC6hdNMakbO7pHK3aZQYBe0Nfkw4RAzgxtU4m6lQ0dEH2cSkC'
-access_token = '1659960641808109568-TS1Ek5xvJGxX26z7rVDvpPyW1kCyMC'
-access_token_secret = '4fkil6IgaJwPGyZyKYCebpgNXRGa6kHeyqtkrNIwXlvdX'
+consumer_key = 'z5S8VtxUMDRIvl3pq4Q9a49Pk'
+consumer_secret = '8MpdpDLEL44VScF9WErp9HNZ2SdUtjrcmHi1rtcl7XSsU6F9PM'
+access_token = '1877017574199721984-zSp8CkXwD5vHMDSqymhqdR86cGcLNo'
+access_token_secret = 'rbuNugMApALJEBi3oJgMLHjr1Kfu4fmUyCrDOpQ9iOrON'
 
 
 # Authenticate Twitter API
 def authenticate_twitter():
     try:
         client = tweepy.Client(
-            bearer_token='AAAAAAAAAAAAAAAAAAAAAKbwxwEAAAAAZnN%2BTWv1zLQhK2oxj2sDcSCebKM%3DjLp30P7V4e0VAHDMDVjjJ52FqUmsd9rpzT0Hxk2nuGlLmytT8H',
+            bearer_token='AAAAAAAAAAAAAAAAAAAAADoQyAEAAAAAzpZn%2FwuUqiBtYejl3PD8QKr1SU4%3DtojamaKRNpViu21ZCTuGnsTXobSZ6RXnvBqsnYzSVk0zdvG5mg',
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
             access_token=access_token,
@@ -92,17 +92,18 @@ def store_data(df, db_name="tweets_data.db"):
         print(f"Error storing data in database: {e}")
 
 
-# Visualize sentiment trends
-def visualize_trends(df):
+# Visualize sentiment distribution
+def visualize_sentiment_distribution(df):
     if df.empty:
-        print("No data to visualize trends.")
+        print("No data to visualize sentiment distribution.")
         return
-    df['created_at'] = pd.to_datetime(df['created_at'])
-    sentiment_over_time = df.groupby([df['created_at'].dt.hour, 'sentiment']).size().unstack(fill_value=0)
-    sentiment_over_time.plot(kind='line', marker='o')
-    plt.title("Sentiment Trends Over Time")
-    plt.xlabel("Hour of Day")
+    sentiment_counts = df["sentiment"].value_counts()
+    sentiment_counts.plot(kind="bar", color=["green", "red", "blue"], alpha=0.7)
+    plt.title("Sentiment Distribution")
+    plt.xlabel("Sentiment")
     plt.ylabel("Number of Tweets")
+    for i, value in enumerate(sentiment_counts):
+        plt.text(i, value, str(value), ha='center', va='bottom')  # Add value labels
     plt.show()
 
 
@@ -147,7 +148,7 @@ def analyze_market_impact(company_name):
 if __name__ == "__main__":
     api = authenticate_twitter()
     if api:
-        keyword = "Microsoft"  # Replace with your desired company or keyword
+        keyword = "aliean"  # Replace with your desired company or keyword
         print(f"Collecting tweets for keyword: {keyword}")
         tweets_df = collect_tweets(api, keyword, count=50)
 
@@ -161,8 +162,8 @@ if __name__ == "__main__":
             print("Storing data...")
             store_data(tweets_df)
 
-            print("Visualizing sentiment trends...")
-            visualize_trends(tweets_df)
+            print("Visualizing sentiment distribution...")
+            visualize_sentiment_distribution(tweets_df)
 
         print("Analyzing market impact...")
         analyze_market_impact(keyword)
