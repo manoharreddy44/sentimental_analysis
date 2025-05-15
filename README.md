@@ -17,8 +17,7 @@ The project provides two main types of data visualizations:
 ### 1. Sentiment Distribution
 This visualization shows the distribution of tweet sentiments (Positive, Negative, Neutral) in a bar chart format.
 
-![Sentiment Distribution Chart](https://drive.google.com/file/d/1BfC4bRV-jKAUH59IW9TANOWnsbI_aEQZ/view?usp=sharing)
-
+![Sentiment Distribution Chart](https://drive.google.com/uc?export=view&id=1BfC4bRV-jKAUH59IW9TANOWnsbI_aEQZ)
 
 Features:
 - Color-coded bars (Green: Positive, Red: Negative, Blue: Neutral)
@@ -29,7 +28,7 @@ Features:
 ### 2. Stock Price Movement
 This visualization displays the intraday stock price movement for the analyzed company.
 
-![Stock Price Movement](https://drive.google.com/file/d/1SFktMPfHeYuvoUZ-pp7fsNY8TAopaTGq/view?usp=sharing)
+![Stock Price Movement](https://drive.google.com/uc?export=view&id=1SFktMPfHeYuvoUZ-pp7fsNY8TAopaTGq)
 
 Features:
 - 5-minute interval data points
